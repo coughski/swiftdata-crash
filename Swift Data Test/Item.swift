@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 final class Item {
-    var info: ItemInfo
+    var info: ItemInfo?
 
     init(info: ItemInfo) {
         self.info = info

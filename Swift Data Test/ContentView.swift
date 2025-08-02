@@ -10,16 +10,16 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: \Item.info.endDate, order: .reverse) private var items: [Item]
+    @Query(sort: \Item.info?.endDate, order: .reverse) private var items: [Item]
 
     var body: some View {
         NavigationSplitView {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.info.endDate, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        Text("Item at \(item.info?.endDate ?? .now, format: Date.FormatStyle(date: .numeric, time: .standard))")
                     } label: {
-                        Text(item.info.endDate, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        Text(item.info?.endDate ?? .now, format: Date.FormatStyle(date: .numeric, time: .standard))
                     }
                 }
                 .onDelete(perform: deleteItems)
